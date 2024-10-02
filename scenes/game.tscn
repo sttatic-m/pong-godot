@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://xg5s5150edyt"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_h7ltd"]
+[ext_resource type="PackedScene" uid="uid://cb65a8jvwahhd" path="res://scenes/wall.tscn" id="1_jola3"]
+[ext_resource type="PackedScene" uid="uid://ney6pfl2vsnb" path="res://scenes/ball.tscn" id="2_a2uy7"]
+[ext_resource type="PackedScene" uid="uid://bijl41w1omemv" path="res://scenes/goal.tscn" id="3_40ssi"]
+[ext_resource type="PackedScene" uid="uid://cqi73t3w81umd" path="res://scenes/player.tscn" id="4_r4352"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_h7ltd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerOneLabel" type="Label" parent="Camera2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -283.0
+offset_top = -156.0
+offset_right = -255.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "000"
+
+[node name="PlayerTwoLabel" type="Label" parent="Camera2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 252.0
+offset_top = -156.0
+offset_right = 280.0
+offset_bottom = -133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "000"
+
+[node name="BottomWall" parent="." instance=ExtResource("1_jola3")]
+position = Vector2(0, 173)
+scale = Vector2(48, 1)
+direction = 1
+
+[node name="TopWall" parent="." instance=ExtResource("1_jola3")]
+position = Vector2(0, -172)
+scale = Vector2(48, 1)
+direction = 1
+
+[node name="Ball" parent="." instance=ExtResource("2_a2uy7")]
+position = Vector2(0, -4)
+
+[node name="Goal2" parent="." instance=ExtResource("3_40ssi")]
+position = Vector2(333, -2)
+scale = Vector2(4.4, 18.64)
+current_player = 2
+
+[node name="Goal3" parent="." instance=ExtResource("3_40ssi")]
+position = Vector2(-333, 0)
+scale = Vector2(4.4, 18.64)
+current_player = 1
+
+[node name="PlayerOne" parent="." instance=ExtResource("4_r4352")]
+position = Vector2(-230, 0)
+current_player = 1
+
+[node name="PlayerTwo" parent="." instance=ExtResource("4_r4352")]
+position = Vector2(240, 0)
+current_player = 2

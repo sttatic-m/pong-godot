@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://ney6pfl2vsnb"]
+
+[ext_resource type="Texture2D" uid="uid://bboikhnl42sp8" path="res://assets/ball.png" id="1_7y3uo"]
+[ext_resource type="Script" path="res://scripts/ball.gd" id="1_v20my"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynbkh"]
+atlas = ExtResource("1_7y3uo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvlxb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynbkh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6oa8"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2k64f"]
+radius = 8.0
+
+[node name="Ball" type="CharacterBody2D"]
+collision_mask = 15
+script = ExtResource("1_v20my")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bvlxb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_r6oa8")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CircleShape2D_2k64f")
+debug_color = Color(0.880573, 0.243968, 0.237829, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
